@@ -2,7 +2,7 @@ use server::run;
 
 #[tokio::test]
 async fn health_check() {
-    spawn_app().await.expect("Failed to spawn app.");
+    spawn_app();
 
     let client = reqwest::Client::new();
 
@@ -16,6 +16,8 @@ async fn health_check() {
     assert_eq!(Some(0), response.content_length());
 }
 
-async fn spawn_app() -> std::io::Result<()> {
-    run().await
+fn spawn_app() {
+    let server = run().expect("Failed to run server");
+
+    let _ = tokio::spawn(server);
 }
