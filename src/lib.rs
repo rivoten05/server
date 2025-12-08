@@ -3,7 +3,7 @@ use std::net::TcpListener;
 
 async fn health_check() -> impl Responder {
     HttpResponse::Ok()
-}
+} 
 
 async fn subscribe() -> HttpResponse {
     HttpResponse::Ok().finish()
